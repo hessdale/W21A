@@ -56,7 +56,7 @@ CREATE TABLE `item` (
   `price` decimal(10,2) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,7 +65,7 @@ CREATE TABLE `item` (
 
 LOCK TABLES `item` WRITE;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
-INSERT INTO `item` VALUES (1,'cinnamon','seasoning',2.99,'2023-06-08 16:01:24'),(2,'nutmeg','seasoning',3.99,'2023-06-08 16:05:06'),(3,'thyme','herb',1.99,'2023-06-08 16:05:06'),(4,'rosemary','herb',3.99,'2023-06-08 16:05:06'),(5,'salt','seasoning',3.65,'2023-06-08 16:05:06'),(6,'pepper','seasoning',3.56,'2023-06-08 16:05:06'),(7,'paprika','seasoning',1.89,'2023-06-08 16:05:06'),(8,'msg','seasoning',1.99,'2023-06-08 16:05:06'),(9,'oregano','herb',3.89,'2023-06-08 16:05:06'),(10,'basil','herb',3.99,'2023-06-08 16:05:06'),(11,'chili','seasoning',3.69,'2023-06-08 16:05:06'),(12,'new item','described',33.00,'2023-06-08 21:48:30');
+INSERT INTO `item` VALUES (1,'cinnamon','seasoning',2.99,'2023-06-08 16:01:24'),(2,'nutmeg','seasoning',3.99,'2023-06-08 16:05:06'),(3,'thyme','herb',1.99,'2023-06-08 16:05:06'),(4,'rosemary','herb',3.99,'2023-06-08 16:05:06'),(5,'salt','seasoning',3.65,'2023-06-08 16:05:06'),(6,'pepper','seasoning',3.56,'2023-06-08 16:05:06'),(7,'paprika','seasoning',1.89,'2023-06-08 16:05:06'),(8,'msg','seasoning',1.99,'2023-06-08 16:05:06'),(9,'oregano','herb',3.89,'2023-06-08 16:05:06'),(10,'basil','herb',3.33,'2023-06-08 16:05:06'),(16,'new item','new item',22.00,'2023-06-09 13:32:48'),(17,'new item','new item',22.00,'2023-06-09 13:33:41');
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -233,6 +233,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `update_item`(id_input int(10),price
     MODIFIES SQL DATA
 begin
 	UPDATE w21a.item SET  price=price_input WHERE id=id_input;
+	select i.price from w21a.item i  where id = id_input;
 	commit;
 END ;;
 DELIMITER ;
@@ -250,4 +251,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-08 23:31:46
+-- Dump completed on 2023-06-09 15:36:11
