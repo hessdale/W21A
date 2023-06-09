@@ -1,5 +1,6 @@
 
 import dbhelper
+import json
 from flask import Flask ,request
 app = Flask(__name__)
 
@@ -7,7 +8,7 @@ app = Flask(__name__)
 def get_items():
     results = dbhelper.run_procedure('call get_all_items()',[])
     if(type(results) == list):
-        return results
+        return json.dumps(results,default=str)
     else:
         return 'something went wrong'
 
@@ -21,11 +22,9 @@ def post_items():
     
 @app.patch('/api/item')
 def patch_items():
-    results = dbhelper.run_procedure('call update_item(?,?)',[request.json.get('id'),request.json.get('price')])
-    if(type(results) == list):
-        return results
-    else:
-        return 'something went wrong'
+    dbhelper.run_procedure('call update_item(?,?)',[request.json.get('id'),request.json.get('price')])
+    return 'item updated'
+    
     
 @app.delete('/api/item')
 def delete_items():
@@ -38,7 +37,7 @@ def delete_items():
 def get_employee():
     results = dbhelper.run_procedure('call get_employee(?)',[request.json.get('id')])
     if(type(results) == list):
-        return results
+        return json.dumps(results,default=str)
     else:
         return 'something went wrong'
 
@@ -52,9 +51,9 @@ def post_employee():
     
 @app.patch('/api/employee')
 def patch_employee():
-    results = dbhelper.run_procedure('call get_employee(?)',[request.json.get('id')])
+    results = dbhelper.run_procedure('call update_employee(?,?)',[request.json.get('id'),request.json.get('wage')])
     if(type(results) == list):
-        return results
+        return json.dumps(results,default=str)
     else:
         return 'something went wrong'
     
